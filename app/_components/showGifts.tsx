@@ -14,7 +14,7 @@ import { JSONContent } from "@tiptap/react";
 import Image from "next/image";
 import AnimatedArrow from "./arrow"; // Flèche animée
 
-type GiftData = {
+export type GiftData = {
   category: { id: number; name: string };
   id: number;
   title: string;
@@ -47,15 +47,6 @@ export function ShowGifts({
     selectedGenre === null
       ? gifts
       : gifts.filter((gift) => gift.category.name === selectedGenre);
-
-  // Création de la liste des hoverItems
-  const hoverItems = filteredGifts.map((gift) => ({
-    title: gift.title,
-    content: gift.content,
-    price: gift.price,
-    images: [gift.images[0]],
-    link: gift.url,
-  }));
 
   // Validation des catégories
   const validCategories = categories.filter(
@@ -107,13 +98,13 @@ export function ShowGifts({
               <p className="text-3xl font-semi-bold">Ho ho ho… Salut toi !</p>
               <p className="font-semibold">
                 Bienvenue dans ma super lente liste de Noël ! <br />
-                C’est moi, le Père Noël paresseux, prêt à t’aider à trouver tes
+                C'est moi, le Père Noël paresseux, prêt à t'aider à trouver tes
                 cadeaux sans te presser. 🎅 <br />
                 Pas besoin de courir dans tous les sens, je suis là pour te
                 guider à mon rythme… très… lentement. 🦥 <br />
                 Si tu cherches des idées, t'inquiète, tout est sous les cartes
                 cliquables juste en dessous. Prends ton temps, il n'y a pas de
-                rush ! Pendant ce temps, je vais m’octroyer une petite sieste
+                rush ! Pendant ce temps, je vais m'octroyer une petite sieste
                 bien méritée. 🎄 <br />
                 Bonne recherche et joyeux Noël !
               </p>

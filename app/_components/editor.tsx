@@ -78,7 +78,7 @@ export function TipTapEditor({
   json,
   onContentChange, // Nouveau callback pour répercuter les changements
 }: {
-  setJson: any;
+  setJson: (json: JSONContent) => void
   json: JSONContent | null;
   onContentChange?: (content: JSONContent) => void;
 }) {

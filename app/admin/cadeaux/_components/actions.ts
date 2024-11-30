@@ -4,6 +4,7 @@ import { UTApi } from "uploadthing/server";
 import { NewsSchema } from "./giftSchema";
 import { z } from "zod";
 import { prisma } from "@/app/db/db";
+import { Gifts } from "@prisma/client";
 
 export async function deleteNewsWithImage(id: number) {
   try {
@@ -38,13 +39,14 @@ export async function deleteNewsWithImage(id: number) {
     });
 
     return { success: true, message: "Cadeau et images supprimés avec succès" };
-  } catch (error: any) {
-    console.error("Erreur lors de la suppression du cadeau :", error);
-    throw new Error(error.message || "Erreur serveur");
+  } catch (error: unknown) {
+    const errorAsError = error as Error;
+    console.error("Erreur lors de la suppression du cadeau :", errorAsError);
+    throw new Error(errorAsError.message || "Erreur serveur");
   }
 }
 
-export async function CreateNews(data: any) {
+export async function CreateNews(data: Gifts) {
   try {
     // Validation with Zod
     const validatedData = NewsSchema.parse(data);
@@ -59,7 +61,7 @@ export async function CreateNews(data: any) {
           },
         },
         url: validatedData.url,
-        price : validatedData.price,
+        price: validatedData.price,
         content: validatedData.content,
         images: validatedData.images,
       },

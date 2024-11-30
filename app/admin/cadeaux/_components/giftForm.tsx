@@ -3,7 +3,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -145,7 +144,7 @@ export function GiftsForm() {
           <FormField
             control={form.control}
             name="price"
-            render={({ field }) => (
+            render={({ }) => (
               <FormItem>
                 <FormLabel>Prix :</FormLabel>
                 <FormControl>
