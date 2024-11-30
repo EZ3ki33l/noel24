@@ -2,20 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Importation des polices variables */
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/fonts/BodoniModa-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900; /* Indique que cette police gère des poids de 100 à 900 */
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/Outfit-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900; /* Indique que cette police gère des poids de 100 à 900 */
+  font-style: normal;
 }
 
+/* Application des polices */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Outfit", Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bodoni Moda", serif;
+}
+
+/* Couleurs personnalisées */
+@layer base {
+  :root {
+    --background: 0, 93%, 26%; /* #D90416 */
+    --background-light: 0 84% 59%;
+    --background-dark: 0 84% 39%;
+    --foreground: 0 0% 20%;
+    --primary: 91 70% 15%; /* #214001 */
+    --primary-light: 91 70% 25%;
+    --primary-dark: 91 70% 10%;
+    --secondary: 343 96% 38%; /* #BF0436 */
+    --secondary-light: 343 96% 48%;
+    --secondary-dark: 343 96% 28%;
+    --third: 353 86% 58%; /* #F22E52 */
+    --third-light: 353 86% 68%;
+    --third-dark: 353 86% 48%;
+    --fourth: 344 97% 24%; /* #730217 */
+    --fourth-light: 344 97% 34%;
+    --fourth-dark: 344 97% 18%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --gold: 29, 65%, 52%;
+    --gold-dark: 39, 89%, 40%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 72.2% 50.6%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 0, 93%, 26%; /* #D90416 darkened */
+    --background-light: 0 84% 49%;
+    --background-dark: 0 84% 29%;
+    --foreground: 0 0% 90%;
+    --primary: 91 70% 10%; /* #214001 darkened */
+    --primary-light: 91 70% 15%;
+    --primary-dark: 91 70% 5%;
+    --secondary: 343 96% 28%; /* #BF0436 darkened */
+    --secondary-light: 343 96% 38%;
+    --secondary-dark: 343 96% 18%;
+    --third: 353 86% 48%; /* #F22E52 darkened */
+    --third-light: 353 86% 58%;
+    --third-dark: 353 86% 38%;
+    --fourth: 344 97% 18%; /* #730217 darkened */
+    --fourth-light: 344 97% 24%;
+    --fourth-dark: 344 97% 12%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --gold: 39, 89%, 55%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 72.2% 50.6%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
