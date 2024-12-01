@@ -53,7 +53,6 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => {
-        // Déplacer l'éditeur dans un composant dédié pour éviter des appels conditionnels
         return (
           <div
             key={item.link}
@@ -91,8 +90,9 @@ export const HoverEffect = ({
                 alt={`affiche de ${item.title}`}
                 width={250}
                 height={200}
-                className="mx-auto h-[250px] w-[250px] object-cover object-center rounded-2xl"
+                className="mx-auto object-cover object-center rounded-2xl max-w-full max-h-[250px]"
               />
+
               <CardTitle>{item.title}</CardTitle>
               <CardDescription>
                 <div className="text-center font-bold text-base">
@@ -129,17 +129,28 @@ export const HoverEffect = ({
 };
 
 const EditorCardContent = ({ content }: { content: JSONContent }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const editor = useEditor({
     content,
     extensions: [StarterKit],
     editable: false,
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class:
-          "prose dark:prose-dark line-clamp-3 overflow-hidden text-ellipsis ", // Appliquer la classe pour le style
+          "prose dark:prose-dark line-clamp-3 overflow-hidden text-ellipsis",
       },
     },
   });
+
+  if (!isClient) {
+    return null; // Do not render editor until client-side
+  }
 
   return (
     <div className="py-10">{editor && <EditorContent editor={editor} />}</div>
@@ -218,12 +229,18 @@ const Modal = ({
   onClose: () => void;
 }) => {
   const [isZoomed, setIsZoomed] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null); // Référence à la modal
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const editor = useEditor({
     content: content,
     extensions: [StarterKit],
     editable: false,
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class: "prose dark:prose-dark",
@@ -262,14 +279,18 @@ const Modal = ({
   };
 
   const handleClose = () => {
-    setIsZoomed(false); // Réinitialise l'état à normal lorsque la modal se ferme
+    setIsZoomed(false); // Reset zoom state when closing modal
     onClose();
   };
 
-  // Styles pour l'image, si zoomée ou non
+  // Styles for the image, zoomed or not
   const imageStyles = isZoomed
     ? "max-h-[80vh] max-w-full object-contain cursor-zoom-out"
     : "max-h-[250px] w-auto object-cover cursor-zoom-in";
+
+  if (!isClient) {
+    return null; // Do not render modal until client-side
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/50 backdrop-blur-lg">
@@ -281,23 +302,20 @@ const Modal = ({
           <X className="w-5 h-5" />
         </button>
 
-        {/* Affichage de l'image avec un clic qui active l'agrandissement */}
         <div onClick={handleImageClick}>
           <Image
             src={images[0]}
-            alt={`affiche de ${title}`}
+            alt={`Image de ${title}`}
             width={500}
             height={500}
-            className={`mx-auto ${imageStyles}`}
+            className={imageStyles}
           />
         </div>
-
-        <h2 className="text-3xl text-primary-light text-center uppercase font-semibold my-4">
-          {title}
-        </h2>
-        <div className="text-center font-bold text-base">
-          {price}
-          <span className="text-xs"> €</span>
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold my-4">{title}</h2>
+          <div className="text-primary-light font-bold text-base">
+            {price} €
+          </div>
         </div>
         <div className="py-4 text-primary-light mb-4">
           {editor && <EditorContent editor={editor} />}

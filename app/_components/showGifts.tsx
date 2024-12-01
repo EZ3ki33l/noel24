@@ -125,7 +125,7 @@ export function ShowGifts({
 
       <motion.div
         ref={sectionRef} // Ajout de la référence pour observer la div globale
-        initial={{ opacity: 0, x: 0 }} // On évite un x négatif qui pourrait affecter la largeur
+        initial={{ opacity: 1, x: 0 }} // On évite un x négatif qui pourrait affecter la largeur
         animate={isInView ? { opacity: 1 } : {}} // Animation uniquement quand la div est visible
         transition={{ duration: 1 }} // Durée de l'animation
         className="flex flex-col justify-center items-center space-y-10 w-full" // Assurez-vous que la largeur est à 100%
