@@ -26,6 +26,8 @@ import { toast } from "sonner";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { Button } from "@/components/ui/button";
 import { TipTapEditor } from "@/app/_components/editor";
+import { useRouter } from "next/navigation";
+import { revalidatePath } from "@/hooks/revalidePath";
 
 export function GiftsForm() {
   const form = useForm({
@@ -39,6 +41,8 @@ export function GiftsForm() {
       images: [],
     },
   });
+
+  const router = useRouter();
 
   const [categories, setCategories] = useState<{ id: number; name: string }[]>(
     []
@@ -67,8 +71,11 @@ export function GiftsForm() {
       });
 
       if (result?.success) {
-        toast.success("Article créé avec succès !");
-        form.reset();
+        toast("Article créé avec succès !");
+        form.reset(); // Reset le formulaire
+        router.push("/admin/cadeaux"); // Redirige vers /admin/cadeaux
+        revalidatePath("/admin/cadeaux");
+        revalidatePath("/");
       } else {
         toast.error(
           result?.message || "Erreur lors de la création de l'article."
@@ -144,7 +151,7 @@ export function GiftsForm() {
           <FormField
             control={form.control}
             name="price"
-            render={({ }) => (
+            render={({}) => (
               <FormItem>
                 <FormLabel>Prix :</FormLabel>
                 <FormControl>
