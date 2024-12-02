@@ -114,7 +114,14 @@ export function ShowGifts({
       </div>
 
       {/* Flèche animée */}
-      <div className="absolute top-[75vh] sm:top-[95svh] left-0 w-full flex justify-evenly pointer-events-none z-10">
+      <div
+        className="absolute left-0 w-full flex justify-evenly pointer-events-none z-10"
+        style={{
+          top: "calc(100vh - 15svh - env(safe-area-inset-bottom))", // Positionnement dynamique
+          transform: "translateY(-50%)", // Centrage vertical
+          paddingBottom: "env(safe-area-inset-bottom)", // Gestion des zones sécurisées
+        }}
+      >
         <AnimatedArrow />
         <AnimatedArrow />
         <AnimatedArrow />
