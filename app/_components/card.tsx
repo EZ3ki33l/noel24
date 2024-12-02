@@ -95,7 +95,7 @@ export const HoverEffect = ({
 
               <CardTitle>{item.title}</CardTitle>
               <CardDescription>
-                <div className="text-center font-bold text-base">
+                <div className="text-center font-bold text-lg">
                   {item.price}
                   <span className="text-xs"> €</span>
                 </div>
@@ -168,7 +168,7 @@ export const Card = ({
 }) => (
   <div
     className={cn(
-      "rounded-2xl h-full w-full p-4 overflow-hidden bg-white dark:bg-black border border-transparent relative z-20",
+      "rounded-2xl h-full w-full p-4 overflow-hidden bg-white/80 dark:bg-black border border-transparent relative z-20",
       className
     )}
     onClick={onClick}
@@ -188,7 +188,7 @@ export const CardTitle = ({
 }) => (
   <h4
     className={cn(
-      "text-primary-light uppercase font-bold mx-auto text-center text-3xl tracking-wide mt-4",
+      "text-primary/90 uppercase font-bold mx-auto text-center text-3xl tracking-wide mt-4",
       className
     )}
   >
@@ -313,7 +313,7 @@ const Modal = ({
         </div>
         <div className="text-center">
           <h2 className="text-2xl font-semibold my-4">{title}</h2>
-          <div className="text-primary-light font-bold text-base">
+          <div className="text-primary font-bold text-lg">
             {price} €
           </div>
         </div>
