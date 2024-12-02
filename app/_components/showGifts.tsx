@@ -114,7 +114,7 @@ export function ShowGifts({
       </div>
 
       {/* Flèche animée */}
-      <div className="absolute top-[75vh] sm:top-[82svh] left-0 w-full flex justify-evenly pointer-events-none z-10">
+      <div className="absolute top-[75vh] sm:top-[95svh] left-0 w-full flex justify-evenly pointer-events-none z-10">
         <AnimatedArrow />
         <AnimatedArrow />
         <AnimatedArrow />
