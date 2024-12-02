@@ -80,75 +80,73 @@ export function ShowGifts({
   }, []);
 
   return (
-    <div className="flex flex-col justify-center my-16 p-14 text-gold relative">
-      <div className="h-[100svh]">
-        <h1 className="text-7xl text-center font-bodoni">Merry Xmas 24</h1>
-        <div className="flex flex-col justify-center items-center space-y-10">
-          <div>
-            <Image
-              src={"/images/pnoel.png"}
-              width={250}
-              height={250}
-              alt="Père noel"
-              className="object-contain object-center rounded-full"
-            />
-          </div>
-          <div>
-            <div className="text-center text-lg space-y-5">
-              <p className="text-3xl font-semi-bold">Ho ho ho… Salut toi !</p>
-              <p className="font-semibold">
-                Bienvenue dans ma super lente liste de Noël ! <br />
-                C'est moi, le Père Noël paresseux, prêt à t'aider à trouver tes
-                cadeaux sans te presser. 🎅 <br />
-                Pas besoin de courir dans tous les sens, je suis là pour te
-                guider à mon rythme… très… lentement. 🦥 <br />
-                Si tu cherches des idées, t'inquiète, tout est sous les cartes
-                cliquables juste en dessous. Prends ton temps, il n'y a pas de
-                rush ! Pendant ce temps, je vais m'octroyer une petite sieste
-                bien méritée. 🎄 <br />
-                Bonne recherche et joyeux Noël !
-              </p>
-            </div>
+    <div className="flex flex-col justify-center my-8 sm:my-16 px-6 sm:px-14 text-gold relative">
+      <div className="h-[90vh] sm:h-[100svh]">
+        <h1 className="text-5xl sm:text-7xl text-center font-bodoni">
+          Merry Xmas 24
+        </h1>
+        <div className="flex flex-col justify-center items-center space-y-8 sm:space-y-10">
+          <Image
+            src="/images/pnoel.png"
+            width={200} // Moins large pour mobile
+            height={200}
+            alt="Père Noël"
+            className="object-contain rounded-full"
+          />
+          <div className="text-center text-base sm:text-lg space-y-4 sm:space-y-5">
+            <p className="text-2xl sm:text-3xl font-semibold">
+              Ho ho ho… Salut toi !
+            </p>
+            <p>
+              Bienvenue dans ma super lente liste de Noël ! <br />
+              C'est moi, le Père Noël paresseux, prêt à t'aider à trouver tes
+              cadeaux sans te presser. 🎅 <br />
+              Pas besoin de courir dans tous les sens, je suis là pour te guider
+              à mon rythme… très… lentement. 🦥 <br />
+              Si tu cherches des idées, t'inquiète, tout est sous les cartes
+              cliquables juste en dessous. Prends ton temps, il n'y a pas de
+              rush ! Pendant ce temps, je vais m'octroyer une petite sieste bien
+              méritée. 🎄 <br />
+              Bonne recherche et joyeux Noël !
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Flèche animée positionnée entre les deux sections */}
-      <div
-        className="absolute top-[82svh] left-0 w-full flex justify-evenly pointer-events-none z-10"
-        style={{ transform: "translateY(-50%)" }}
-      >
+      {/* Flèche animée */}
+      <div className="absolute top-[75vh] sm:top-[82svh] left-0 w-full flex justify-evenly pointer-events-none z-10">
         <AnimatedArrow />
         <AnimatedArrow />
         <AnimatedArrow />
       </div>
 
       <motion.div
-        ref={sectionRef} // Ajout de la référence pour observer la div globale
-        initial={{ opacity: 1, x: 0 }} // On évite un x négatif qui pourrait affecter la largeur
-        animate={isInView ? { opacity: 1 } : {}} // Animation uniquement quand la div est visible
-        transition={{ duration: 1 }} // Durée de l'animation
-        className="flex flex-col justify-center items-center space-y-10 w-full" // Assurez-vous que la largeur est à 100%
+        ref={sectionRef}
+        initial={{ opacity: 1 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1 }}
+        className="flex flex-col justify-center items-center space-y-8 w-full"
       >
-        <div className="flex gap-5 pt-16 w-[80%] mx-auto">
+        {/* Sélecteur de catégorie */}
+        <div className="flex gap-3 sm:gap-5 pt-8 sm:pt-16 w-full sm:w-[80%] mx-auto">
           <Select
             onValueChange={(value) =>
               setSelectedGenre(value === "all-genres" ? null : value)
             }
             value={selectedGenre || "all-genres"}
           >
-            <SelectTrigger className="w-full text-base">
+            <SelectTrigger className="w-full text-sm sm:text-base">
               <SelectValue placeholder="Tous les genres" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all-genres" className="text-base">
+              <SelectItem value="all-genres" className="text-sm sm:text-base">
                 Tous les genres
               </SelectItem>
               {validCategories.map((category) => (
                 <SelectItem
                   key={category.id}
                   value={category.name}
-                  className="text-base"
+                  className="text-sm sm:text-base"
                 >
                   {category.name}
                 </SelectItem>
@@ -157,7 +155,8 @@ export function ShowGifts({
           </Select>
         </div>
 
-        <div className="flex flex-col gap-3 justify-center items-center min-h-[15svh]">
+        {/* Cartes cadeaux */}
+        <div className="flex gap-6 sm:gap-8 justify-center items-center min-h-[15svh]">
           {filteredGifts.length === 0 ? (
             <p>Pas de cadeaux actuellement</p>
           ) : (
